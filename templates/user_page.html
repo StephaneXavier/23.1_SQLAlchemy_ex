@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+{%block title%} {{user.first_name}} {{user.last_name}} {%endblock%}
+
+{%block content%}
+
+<img src="{{user.image_url}}" alt="">
+<h2>first name: {{user.first_name}}</h2>
+<h2>last name: {{user.last_name}}</h2>
+
+<a href="/users/{{user.id}}/edit">Edit User</a>
+
+<a href="/">Home Page</a>
+
+{%endblock%}

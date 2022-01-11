@@ -1,0 +1,25 @@
+{%extends 'base.html' %}
+
+{%block title%}Edit user form{%endblock%}
+
+{%block content%}
+<h1>Edit User form</h1>
+<h3>Current user info</h3>
+<ul>
+    <li>first name: {{user.first_name}}</li>
+    <li>last name: {{user.last_name}}</li>
+    <li>image url: {{user.image_url}}</li>
+</ul>
+<form action="/users/{{user.id}}/edit" method="POST">
+    <input type="text" name='first_name' placeholder="first name">
+    <input type="text" name="last_name" placeholder="last name">
+    <input type="url" name="image_url" placeholder="image url"> <br>
+    <input type="submit" name="delete_user" value= "Delete User" formaction="/users/{{user.id}}/delete">  <br>
+    <input type="submit" name="edit_user" value="Edit User">
+
+
+</form>
+
+<a href="/">Cancel</a>
+
+{%endblock%}
