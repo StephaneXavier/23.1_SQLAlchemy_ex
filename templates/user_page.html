@@ -2,13 +2,28 @@
 {%block title%} {{user.first_name}} {{user.last_name}} {%endblock%}
 
 {%block content%}
+{% for msg in get_flashed_messages()%}
+<p>{{msg}}</p>
+{%endfor%}
 
 <img src="{{user.image_url}}" alt="">
-<h2>first name: {{user.first_name}}</h2>
-<h2>last name: {{user.last_name}}</h2>
+<h1>{{user.first_name}} {{user.last_name}} </h1>
 
-<a href="/users/{{user.id}}/edit">Edit User</a>
+<a href="/users/{{user.id}}/edit"><button>Edit User</button></a>
+<form action="/users/{{user.id}}/delete" method="POST"><Button>Delete</Button></form>
+<hr>
 
-<a href="/">Home Page</a>
+<h2>Posts</h2>
+<ul>
+    {%for post in posts%}
+    <a href="/posts/{{post.id}}">
+        <li>{{post.title}}</li>
+    </a>
+    {%endfor%}
+</ul>
+<a href="/users/{{user.id}}/posts/new"><button>New Post</button></a><br>
+
+<a href="/"><button>Home page</button></a>
+
 
 {%endblock%}
