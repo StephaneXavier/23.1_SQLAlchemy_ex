@@ -19,7 +19,7 @@ class User(db.Model):
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     image_url = db.Column(db.String(300), default='https://cdn-icons-png.flaticon.com/512/18/18601.png')
-
+    
     def __repr__(self):
        return f'<{self.first_name} {self.last_name}>'
     
@@ -34,6 +34,19 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
-    user_relationship = db.relationship('User',backref='posts')
+    user = db.relationship('User',backref='posts')
+    tags = db.relationship('Tag',secondary='posts_tags',backref='post')
 
-   
+class Tag(db.Model):
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    name = db.Column(db.Text, unique = True, nullable = False)
+
+    
+
+class PostTag(db.Model):
+    __tablename__= 'posts_tags'
+
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True, nullable = False)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key = True, nullable = False)

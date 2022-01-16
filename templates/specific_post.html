@@ -4,11 +4,23 @@
 {%block content%}
 
 <h1>{{post.title}}</h1>
-<h3>{{post.content}}</h3>
-<p>By {{post.user_relationship.first_name}} {{post.user_relationship.last_name}}</p>
+<p>{{post.content}}</p>
+<p><i>By {{post.user.first_name}} {{post.user.last_name}} on {{post.created_at}}</i></p>
 
+<p><b>Tags:</b></p>
+{%for tag in tags%}
 
-<a href="/users/{{post.user_id}}">Back to user</a>
-<a href="/users"> Home Page </a>
+<p>{{tag.name}}</p>
+
+{%endfor%}
+<a href="/posts/{{post_id}}/edit"><button>Edit</button></a>
+
+<form action="/posts/{{post_id}}/delete" method="POST">
+    <input type="submit" value='Delete'>
+</form>
+
+<hr>
+<a href="/users/{{post.user_id}}"><button>Back to user</button></a>
+<a href="/users"> <button>Home Page</button> </a>
 
 {%endblock%}

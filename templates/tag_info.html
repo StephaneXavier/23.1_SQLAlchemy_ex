@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{%block title%} Tag {{tag.id}} {%endblock%}
+
+{%block content%}
+<h1>{{tag.name}}</h1>
+
+<ul>
+    {%for post in posts %}
+    <a href="/posts/{{post.id}}">
+        <li>
+            {{post.title}}
+        </li>
+    </a>
+    {%endfor%}
+</ul>
+<form action="/tags/{{tag.id}}/edit">
+    <a href="/tags/{{tag.id}}/edit"><button>Edit</button></a>
+</form>
+
+<form action="/tags/{{tag.id}}/delete" method="POST">
+    <input type="submit" value='Delete'>
+</form>
+<hr>
+<a href="/"><button>Home Page</button></a>
+<a href="/tags"><button>Tags list</button></a>
+
+{%endblock%}

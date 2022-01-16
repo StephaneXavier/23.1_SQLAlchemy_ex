@@ -1,8 +1,9 @@
-from models import User,db, Post
+from models import User,db, Post, PostTag, Tag
 from unittest import TestCase
 from app import app
 from pdb import set_trace
-
+db.drop_all()
+db.create_all()
 
 class PostModelTestCase(TestCase):
     """test for posts"""
@@ -10,6 +11,7 @@ class PostModelTestCase(TestCase):
     def setUp(self):
         Post.query.delete()
         User.query.delete()
+        
         # create a test user. We will need the test_user id, as the posts table has a foreign key from users
         test_user = User(first_name = 'Jones', last_name = 'Steven', image_url = 'https://cdn-icons-png.flaticon.com/512/18/18601.png' )
         db.session.add(test_user)
@@ -20,9 +22,10 @@ class PostModelTestCase(TestCase):
         test_post = Post(title = 'Tea lover', content = 'Secret content', user_id = test_user_id)
         db.session.add(test_post)
         db.session.commit()
+        
     
     def tearDown(self):
-
+        
         db.session.rollback()
 
     

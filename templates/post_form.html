@@ -8,7 +8,11 @@
     Title <input type="text" name='title'><br>
     <textarea name="content" cols="30" rows="10" placeholder="Type post content here"></textarea><br>
     <input type="submit" value="Submit">
+    {%for tag in tags%}
+    <input type="checkbox" name="tag" value={{tag.id}}> {{tag.name}}
+    {%endfor%}
 </form>
+<hr>
 <a href="/users/{{user_id}}"><button>Cancel</button></a>
 
 

@@ -4,7 +4,7 @@
 
 {%block content%}
 
-<h1>Post '{{post.title}}' by {{post.user_relationship.first_name}} {{post.user_relationship.last_name}}</h1>
+<h1>Post '{{post.title}}' by {{post.user.first_name}} {{post.user.last_name}}</h1>
 <p>{{post.content}}</p>
 <hr>
 
@@ -12,8 +12,12 @@
 <form action="/posts/{{post.id}}/edit" method="POST">
     Title <input type="text" name='title'><br>
     <textarea name="content" cols="30" rows="10" placeholder="Type post content here"></textarea><br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit"> <br>
+    <b>Tags</b>{%for tag in tags%}
+    <input type="checkbox" name = 'tag' value="{{tag.id}}"> {{tag.name}}
+    {%endfor%}
 </form>
+<hr>
 <a href="/"><button>Cancel</button></a>
 
 
